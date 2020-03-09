@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:TRPC_Core.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -14,25 +15,94 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
             <RowDefinition />
+            <RowDefinition  Height="50"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Column="0"
-              Grid.Row="1">
+              Grid.Row="1"
+              Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
         </Grid>
 
-        
+        <Label Content="Race data"
+               Grid.Row="0"
+               Grid.Column="0"/>
 
-        <Label Content="Team 1"
-               Grid.Column="0"
-               Grid.Row="1"/>
+        <DataGrid x:Name="Players" Grid.Row="1" Grid.Column="0"
+                  AlternatingRowBackground="WhiteSmoke"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+        >
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell" >
+                    <Setter Property="Padding" Value="10"/>
+                   
+                </Style>
+            </DataGrid.CellStyle>
 
-        <Label Content="Team 2"
+        </DataGrid>
+
+        <Label Content="Result"
                Grid.Column="1"
-               Grid.Row="1"/>
+               Grid.Row="0"/>
+
+        <Grid Grid.Row="1"
+              Grid.Column="1"
+              Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Vertical" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Label}">
+                        <Setter Property="Margin" Value="0,10,0,0"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Label Content="Team 1 Score:"/>
+                <Label x:Name="Team1Result" />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Grid.Row="1">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Label}">
+                        <Setter Property="Margin" Value="0,10,0,0"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Label Content="Team 2 Score:"/>
+                <Label x:Name="Team2Result" />
+            </StackPanel>
+
+        </Grid>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="8">
+
+            <Button x:Name="ClearPlayers" Content="Clear Players"
+                    Width="120"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,10,0"/>
+
+            <Button x:Name="UpdateResult" Content="Update result"
+                    Width="120"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,10,0"/>
+
+        </StackPanel>
+
 
     </Grid>
 </UserControl>

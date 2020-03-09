@@ -7,9 +7,9 @@ namespace TRPC_Core
 {
     public class ShellViewModel : Conductor<Object>
     {
+
         public async void RaceEntry()
         {
-            Console.WriteLine("Hello");
             await ActivateItemAsync(new RaceViewModel());
         }
     }
