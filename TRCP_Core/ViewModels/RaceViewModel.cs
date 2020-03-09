@@ -16,21 +16,7 @@ namespace TRPC_Core.ViewModels
         private int _teamBlueResult;
         private BindableCollection<PlayerModel> _players;
 
-        private List<string> mockNameData = new List<string>
-       {
-            "Gible",
-            "Stakataka",
-            "Onix",
-            "Slowbro",
-            "Golem Alola",
-            "Flabebe",
-            "Weepinbell",
-            "Lilligant",
-            "Dugtrio",
-            "Sylveon",
-            "Drampa",
-            "Xatu"
-        };
+        private List<string> mockNameData = FileOperations.ReadData(Globals.FilePath).ToList();
 
         public BindableCollection<PlayerModel> Players
         {

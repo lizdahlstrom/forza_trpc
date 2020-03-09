@@ -13,15 +13,29 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0"
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal"
+                    Margin="10" HorizontalAlignment="Center">
+            <TextBox
+                     Width="200" 
+                     Margin="10"
+                     Height="30"
+                     Text="{Binding Path=SearchBox, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button x:Name="AddBtn" Content="Add" Margin="10" />
+            <Button x:Name="DeleteBtn" Content="Delete" Margin="10" />
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="1"
                     Grid.Column="0"
-                    Orientation="Vertical">
+                    Orientation="Vertical"
+                    Margin="10">
 
-            <ListBox ItemsSource="{Binding Gamertags}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-
+            <ListBox ItemsSource="{Binding FilteredTags, Mode=OneWay}" HorizontalAlignment="Center"
+                     VerticalAlignment="Center" SelectedIndex="0" SelectedItem="{Binding SelectedTag, Mode=TwoWay}">
             </ListBox>
         </StackPanel>
 
