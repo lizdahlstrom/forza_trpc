@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Caliburn.Micro;
 using TRPC_Core.Datatypes;
 using TRPC_Core.Models;
+using TRPC_Core.Utils;
 
 namespace TRPC_Core.ViewModels
 {
@@ -14,8 +15,9 @@ namespace TRPC_Core.ViewModels
         private int _teamRedResult;
         private int _teamBlueResult;
         private BindableCollection<PlayerModel> _players;
-        private List<String> mockNameData = new List<string>
-        {
+
+        private List<string> mockNameData = new List<string>
+       {
             "Gible",
             "Stakataka",
             "Onix",
@@ -63,11 +65,14 @@ namespace TRPC_Core.ViewModels
         public RaceViewModel()
         {
             ClearPlayers();
+            
         }
 
         public void UpdateResult()
         {
             CalculateTeamPoints();
+            var tags = Players.Select(player => player.Gamertag).ToArray();
+            FileOperations.SaveData(tags, Globals.FilePath);
         }
 
         public void ClearPlayers()
@@ -81,6 +86,8 @@ namespace TRPC_Core.ViewModels
 
         public void CalculateTeamPoints()
         {
+            // Validate input
+            // 50/50 red blue team members
             ResetResults();
 
             var sorted = Players.OrderBy(player => player.Position).ToList();

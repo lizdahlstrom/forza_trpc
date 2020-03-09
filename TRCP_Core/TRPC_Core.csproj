@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Views\PlayersView.xaml">
+    <Page Update="Views\GamertagsView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\RaceView.xaml">

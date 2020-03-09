@@ -7,10 +7,21 @@ namespace TRPC_Core
 {
     public class ShellViewModel : Conductor<Object>
     {
+        public RaceViewModel RaceViewModel = new RaceViewModel();
+        public GamertagsViewModel GamertagsViewModel;
 
         public async void RaceEntry()
         {
-            await ActivateItemAsync(new RaceViewModel());
+            GamertagsViewModel?.SaveData();
+
+            await ActivateItemAsync(RaceViewModel);
+        }
+
+        public async void GamertagsView()
+        {
+            if (GamertagsViewModel == null)
+                GamertagsViewModel = new GamertagsViewModel();
+            await ActivateItemAsync(GamertagsViewModel);
         }
     }
 }
