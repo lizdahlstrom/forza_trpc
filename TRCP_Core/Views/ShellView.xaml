@@ -1,0 +1,51 @@
+<Window x:Class="TRPC_Core.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Forza Team Race Point Counter"
+        Width="800"
+        Height="500">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.RowSpan="3">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="0,10,0,0"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <Button x:Name="RaceEntry" 
+                    Content="Race Entry"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Height="50"
+                    Width="120"/>
+            <Button x:Name="ManagePlayers" 
+                    Content="Manage Players"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Height="50"
+                    Width="120"/>
+        </StackPanel>
+
+
+
+        <ContentControl x:Name="ActiveItem" 
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2" 
+                        Grid.RowSpan="3"/>
+
+    </Grid>
+
+</Window>

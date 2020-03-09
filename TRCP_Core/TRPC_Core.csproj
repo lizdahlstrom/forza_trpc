@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Caliburn.Micro" Version="4.0.117-alpha" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\PlayersView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\RaceView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>
