@@ -11,9 +11,24 @@ namespace TRPC_Core.ViewModels
 {
     public class RaceViewModel: Screen
     {
-        private int _team1Result;
-        private int _team2Result;
+        private int _teamRedResult;
+        private int _teamBlueResult;
         private BindableCollection<PlayerModel> _players;
+        private List<String> mockNameData = new List<string>
+        {
+            "Gible",
+            "Stakataka",
+            "Onix",
+            "Slowbro",
+            "Golem Alola",
+            "Flabebe",
+            "Weepinbell",
+            "Lilligant",
+            "Dugtrio",
+            "Sylveon",
+            "Drampa",
+            "Xatu"
+        };
 
         public BindableCollection<PlayerModel> Players
         {
@@ -25,34 +40,29 @@ namespace TRPC_Core.ViewModels
             }
         }
 
-        public int Team1Result
+        public int TeamRedResult
         {
-            get => _team1Result;
+            get => _teamRedResult;
             set
             {
-                _team1Result = value;
-                NotifyOfPropertyChange(() => Team1Result);
+                _teamRedResult = value;
+                NotifyOfPropertyChange(() => TeamRedResult);
             }
         }
 
-        public int Team2Result
+        public int TeamBlueResult
         {
-            get => _team2Result;
+            get => _teamBlueResult;
             set
             {
-                _team2Result = value;
-                NotifyOfPropertyChange(() => Team2Result);
+                _teamBlueResult = value;
+                NotifyOfPropertyChange(() => TeamBlueResult);
             } 
         }
 
         public RaceViewModel()
         {
-            Console.WriteLine("called race view model");
-            Players = new BindableCollection<PlayerModel>();
-            for (var i = 0; i < 12; i++)
-            {
-                Players.Add((i + 1) % 2 == 0  ? new PlayerModel(i + 1, Team.Blue) : new PlayerModel(i + 1));
-            }
+            ClearPlayers();
         }
 
         public void UpdateResult()
@@ -60,25 +70,30 @@ namespace TRPC_Core.ViewModels
             CalculateTeamPoints();
         }
 
+        public void ClearPlayers()
+        {
+            Players = new BindableCollection<PlayerModel>();
+            for (var i = 0; i < 12; i++)
+            {
+                Players.Add((i + 1) > 6 ? new PlayerModel(i + 1, Team.Blue,mockNameData[i]) : new PlayerModel(i + 1, Team.Red, mockNameData[i]));
+            }
+        }
+
         public void CalculateTeamPoints()
         {
-            Team1Result = 0;
-            Team2Result = 0;
-            Players.Apply(player => player.Points = 0);
+            ResetResults();
 
             var sorted = Players.OrderBy(player => player.Position).ToList();
             sorted[0].Points += 50;
 
             if (sorted[0].Team == Team.Red)
             {
-                Team1Result += 50;
+                TeamRedResult += 50;
             }
             else
             {
-                Team2Result += 50;
+                TeamBlueResult += 50;
             }
-
-            // TODO: Set points for each player
 
             // for each player, starting on top
             for (var i = 0; i < sorted.Count; i++)
@@ -91,11 +106,11 @@ namespace TRPC_Core.ViewModels
                         sorted[i].Points += 100;
                         if (sorted[j].Team == Team.Red)
                         {
-                            Team1Result += 100;
+                            TeamBlueResult += 100;
                         }
                         else
                         {
-                            Team2Result += 100;
+                            TeamRedResult += 100;
                         }
                     }
                 }
@@ -103,7 +118,14 @@ namespace TRPC_Core.ViewModels
 
             Players = new BindableCollection<PlayerModel>(sorted);
         }
-            
+
+        private void ResetResults()
+        {
+            TeamRedResult = 0;
+            TeamBlueResult = 0;
+            Players.Apply(player => player.Points = 0);
+        }
+
         protected override Task OnActivateAsync(CancellationToken cancellationToken)
         {
             return base.OnActivateAsync(cancellationToken);

@@ -15,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
             <RowDefinition />
-            <RowDefinition  Height="50"/>
+            <RowDefinition  Height="60"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Column="0"
@@ -29,27 +29,27 @@
 
         <Label Content="Race data"
                Grid.Row="0"
-               Grid.Column="0"/>
+               Grid.Column="0" FontSize="20"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"/>
 
         <DataGrid x:Name="Players" Grid.Row="1" Grid.Column="0"
                   AlternatingRowBackground="WhiteSmoke"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
-                  HorizontalAlignment="Center"
-                  VerticalAlignment="Center"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Margin="10"
         >
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell" >
-                    <Setter Property="Padding" Value="10"/>
-                   
-                </Style>
-            </DataGrid.CellStyle>
 
         </DataGrid>
 
-        <Label Content="Result"
+        <Label Content="Team Result"
                Grid.Column="1"
-               Grid.Row="0"/>
+               Grid.Row="0" 
+               FontSize="20"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"/>
 
         <Grid Grid.Row="1"
               Grid.Column="1"
@@ -67,8 +67,11 @@
                         <Setter Property="Margin" Value="0,10,0,0"/>
                     </Style>
                 </StackPanel.Resources>
-                <Label Content="Team 1 Score:"/>
-                <Label x:Name="Team1Result" />
+                <Label Content="Red Team Score:" FontSize="16"/>
+                <StackPanel Orientation="Horizontal" >
+                    <Label x:Name="TeamRedResult" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <Label Content="PTS" HorizontalAlignment="Center" FontSize="22"/>
+                </StackPanel>
             </StackPanel>
 
             <StackPanel Orientation="Vertical"
@@ -80,8 +83,11 @@
                         <Setter Property="Margin" Value="0,10,0,0"/>
                     </Style>
                 </StackPanel.Resources>
-                <Label Content="Team 2 Score:"/>
-                <Label x:Name="Team2Result" />
+                <Label Content="Blue Team Score:" FontSize="16" />
+                <StackPanel Orientation="Horizontal" >
+                    <Label x:Name="TeamBlueResult" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <Label Content="PTS" HorizontalAlignment="Center" FontSize="22"/>
+                </StackPanel>
             </StackPanel>
 
         </Grid>
@@ -89,16 +95,15 @@
         <StackPanel Orientation="Horizontal"
                     Grid.Row="2"
                     Grid.Column="1"
-                    Margin="8">
+                    Margin="8,0,0,0">
 
             <Button x:Name="ClearPlayers" Content="Clear Players"
                     Width="120"
-                    HorizontalAlignment="Right"
+                    
                     Margin="0,0,10,0"/>
 
             <Button x:Name="UpdateResult" Content="Update result"
                     Width="120"
-                    HorizontalAlignment="Right"
                     Margin="0,0,10,0"/>
 
         </StackPanel>
