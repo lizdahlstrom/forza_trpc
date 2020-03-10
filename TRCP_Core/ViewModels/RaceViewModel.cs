@@ -15,8 +15,17 @@ namespace TRPC_Core.ViewModels
         private int _teamRedResult;
         private int _teamBlueResult;
         private BindableCollection<PlayerModel> _players;
+        private BindableCollection<string> _gamertagsData;
 
-        private List<string> mockNameData = FileOperations.ReadData(Globals.FilePath).ToList();
+        public BindableCollection<string> GamertagsData
+        {
+            get => _gamertagsData;
+            set
+            {
+                _gamertagsData = value;
+                NotifyOfPropertyChange(() => GamertagsData);
+            }
+        }
 
         public BindableCollection<PlayerModel> Players
         {
@@ -50,15 +59,18 @@ namespace TRPC_Core.ViewModels
 
         public RaceViewModel()
         {
+            UpdateGamertagsData();
             ClearPlayers();
-            
         }
 
         public void UpdateResult()
         {
             CalculateTeamPoints();
-            var tags = Players.Select(player => player.Gamertag).ToArray();
-            FileOperations.SaveData(tags, Globals.FilePath);
+        }
+
+        public void UpdateGamertagsData()
+        {
+            GamertagsData = new BindableCollection<string>(FileOperations.ReadData(Globals.FilePath).ToList());
         }
 
         public void ClearPlayers()
@@ -66,7 +78,7 @@ namespace TRPC_Core.ViewModels
             Players = new BindableCollection<PlayerModel>();
             for (var i = 0; i < 12; i++)
             {
-                Players.Add((i + 1) > 6 ? new PlayerModel(i + 1, Team.Blue,mockNameData[i]) : new PlayerModel(i + 1, Team.Red, mockNameData[i]));
+                Players.Add((i + 1) > 6 ? new PlayerModel(i + 1, Team.Blue) : new PlayerModel(i + 1, Team.Red));
             }
         }
 

@@ -60,15 +60,10 @@ namespace TRPC_Core.ViewModels
             FileOperations.SaveData(Gamertags.ToArray(), Globals.FilePath);
         }
 
-        public void SearchBtn()
-        {
-            string result;
-            // should not have to search, should filter isntead.
-
-        }
-
         public void AddBtn()
         {
+            if (SearchBox.Equals("")) return;
+
             Gamertags.Add(SearchBox);
             NotifyOfPropertyChange(() => Gamertags);
             SearchBox = "";

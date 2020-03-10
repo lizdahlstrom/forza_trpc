@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Forza Team Race Point Counter"
         Width="1200"
-        Height="700"
+        Height="760"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
@@ -11,7 +11,7 @@
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}">
 
-    <Grid Background="White">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="140"/>
             <ColumnDefinition/>
@@ -45,10 +45,12 @@
                     Margin="0,8,0,0"/>
         </StackPanel>
         
-            <Viewbox Width="35" Height="35" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="2" Margin="10"
-                     ToolTip="Author: Liz Dahlstrom &#x0a;liz.dahlstrom@gmail.com"  >
-            <Canvas Width="24" Height="24">
-                <Path Fill="MediumPurple" Data="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
+        <Viewbox Width="35" Height="35" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="2"
+                 Grid.Column="0"
+                 Margin="10"
+                 ToolTip="Author: Liz Dahlstrom &#x0a;liz.dahlstrom@gmail.com"  >
+            <Canvas Width="24" Height="24" ToolTip="Author: Liz Dahlstrom &#x0a;liz.dahlstrom@gmail.com" >
+                <Path ToolTip="Author: Liz Dahlstrom &#x0a;liz.dahlstrom@gmail.com" Fill="MediumPurple" Data="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
             </Canvas>
         </Viewbox>
            
@@ -58,7 +60,6 @@
                         Grid.Column="1" 
                         Grid.ColumnSpan="2" 
                         Grid.RowSpan="3"/>
-
 
     </Grid>
 

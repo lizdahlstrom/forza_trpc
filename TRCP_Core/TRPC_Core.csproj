@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Caliburn.Micro" Version="4.0.117-alpha" />
     <PackageReference Include="MaterialDesignThemes" Version="3.1.0-ci981" />
+    <PackageReference Include="WPFTextBoxAutoComplete" Version="1.0.5" />
   </ItemGroup>
 
   <ItemGroup>

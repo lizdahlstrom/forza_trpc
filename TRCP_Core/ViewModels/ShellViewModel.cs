@@ -1,4 +1,6 @@
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 using TRPC_Core.Models;
 using TRPC_Core.ViewModels;
@@ -13,7 +15,7 @@ namespace TRPC_Core
         public async void RaceEntry()
         {
             GamertagsViewModel?.SaveData();
-
+            RaceViewModel.UpdateGamertagsData();
             await ActivateItemAsync(RaceViewModel);
         }
 
@@ -23,5 +25,12 @@ namespace TRPC_Core
                 GamertagsViewModel = new GamertagsViewModel();
             await ActivateItemAsync(GamertagsViewModel);
         }
+
+        protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
+        {
+            GamertagsViewModel?.SaveData();
+            return base.OnDeactivateAsync(close, cancellationToken);
+        }
+
     }
 }

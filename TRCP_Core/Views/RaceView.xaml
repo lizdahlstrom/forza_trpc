@@ -4,8 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TRPC_Core.Views"
+             xmlns:team="clr-namespace:TRPC_Core.Datatypes"
+             xmlns:viewmodels="clr-namespace:TRPC_Core.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
+             xmlns:System="clr-namespace:System;assembly=System.Runtime"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -34,22 +39,55 @@
                VerticalAlignment="Center"/>
 
         <DataGrid x:Name="Players" Grid.Row="1" Grid.Column="0"
-                  AlternatingRowBackground="WhiteSmoke"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
                   Margin="10"
+                  AutoGenerateColumns="False"
         >
+
+            <DataGrid.Resources>
+                <!--Create list of enumeration values-->
+                <ObjectDataProvider x:Key="teamEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                    <ObjectDataProvider.MethodParameters>
+                        <x:Type Type="team:Team"/>
+                    </ObjectDataProvider.MethodParameters>
+                </ObjectDataProvider>
+                <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                    <Setter Property="IsTabStop" Value="False"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <materialDesign:DataGridTextColumn Header="Position" Binding="{Binding Path=Position, Mode=TwoWay}" />
+
+                <DataGridTemplateColumn Header="Gamertags"
+                                                      MinWidth="160">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Gamertag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding Path=DataContext.GamertagsData, RelativeSource={RelativeSource AncestorType={x:Type UserControl}} }" 
+                                     behaviors:AutoCompleteBehavior.AutoCompleteStringComparison="InvariantCultureIgnoreCase"
+                                     FontSize="12"
+                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <materialDesign:DataGridTextColumn Header="Points" MinWidth="70" Binding="{Binding Path=Points, Mode=OneWay}" />
+                <materialDesign:DataGridComboBoxColumn Header="Team" 
+                                        SelectedItemBinding="{Binding Path=Team, Mode=TwoWay}" 
+                                        ItemsSource="{Binding Source={StaticResource teamEnum}}" />
+            </DataGrid.Columns>
 
         </DataGrid>
 
         <Label Content="Team Result"
-               Grid.Column="1"
-               Grid.Row="0" 
-               FontSize="20"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"/>
+                             Grid.Column="1"
+                             Grid.Row="0" 
+                             FontSize="20"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             />
 
         <Grid Grid.Row="1"
               Grid.Column="1"
@@ -65,6 +103,7 @@
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Label}">
                         <Setter Property="Margin" Value="0,10,0,0"/>
+                        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignLightBackground}"/>
                     </Style>
                 </StackPanel.Resources>
                 <Label Content="Red Team Score:" FontSize="16"/>
@@ -81,11 +120,12 @@
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Label}">
                         <Setter Property="Margin" Value="0,10,0,0"/>
+                        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignLightBackground}"/>
                     </Style>
                 </StackPanel.Resources>
                 <Label Content="Blue Team Score:" FontSize="16" />
                 <StackPanel Orientation="Horizontal" >
-                    <Label x:Name="TeamBlueResult" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <Label x:Name="TeamBlueResult" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center"/>
                     <Label Content="PTS" HorizontalAlignment="Center" FontSize="22"/>
                 </StackPanel>
             </StackPanel>
